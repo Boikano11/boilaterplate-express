@@ -1,5 +1,6 @@
 let express = require('express');
 let app = express();
+require('dotenv').config();
 const path = require('path');
 
 // Serve static files from the /public path
@@ -10,9 +11,17 @@ app.get('/', (req, res)=>{
 });
 
 app.get('/json', (req, res) => {
+    let response = "Hello json";
+    if(process.env.MESSAGE_STYLE === "uppercase"){
+        response = response.toUpperCase();
+    }else{
+        response;
+    }
+
     res.json({
-        message: "Hello json"
-    });
+        message: response
+    }); 
+       
 });
 
  module.exports = app;
