@@ -29,6 +29,33 @@ app.get('/json', (req, res) => {
     res.json({
         message: response  // Sends the response as JSON
     });
+
+});
+
+app.get('/now', function(req, res, next){
+    req.time = new Date().toString();
+    next();
+}, function(req, res){
+    res.send({time: req.time});
+});
+
+app.get('/:word/echo', (req, res)=>{
+    const { word } = req.params;
+  
+    res.json({
+        echo: word
+    });
+
+});
+
+app.get('/name', (req, res)=>{
+    var firstname = req.query.first;
+    var lastname = req.query.last;
+
+    var {first: firstname, last: lastname} = req.query;
+    res.json({
+        name: `${firstname} ${lastname}`
+    });
 });
 
 // Export the app module
